@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN | RBP</title>
+    <style>
+    #operator-login{
+        margin: auto;
+        padding: 10px;
+        box-shadow: 0 0 15px 5px #00000075;
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        justify-content: center;
+
+    }
+    #userinp_label, #passinp_label, #cellinput_label, #pname_label, #presenty_label{
+        width: 25vw;
+        font-size: 20px;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    #userinput, #passwordinput, #cellinput, #pname, #presenty{
+        font-size: 20px;
+        margin: auto;
+        width: 25vw;
+        font-family: 'Courier New', Courier, monospace;
+        outline: none;
+    }
+    #login{
+        font-size: 20px;
+        width: 15vw;
+        margin: auto;
+        font-family: 'Courier New', Courier, monospace;
+        outline: none;  
+    }
+    .boxes{
+        border: 2px solid black;
+        margin: 10px;
+        display: none;
+        height: fit-content;
+
+    }
+    #actions{
+        display: flex;
+        width: 100%;
+        margin-top: 25px;
+        height: fit-content;
+    }
+    .buttons{
+        margin: 0% auto;
+        font-size: 25px;
+        outline: none;
+
+    }
+    #criminal-data{
+        width: 100%;
+        padding: 10px;
+        font-size: 20px;
+    }
+    </style>
+</head>
+<body>
+    <br><br><center><h1 style="margin:0%; padding:0%">OPERATOR LOGIN</h1></center><br><br><br>
+    <div id="login-box">
+        <div id="operator-login">
+            <label for="userinput" id="userinp_label">ENTER USERNAME</label>
+            <input type="text" name="userinput" id="userinput" placeholder="Full Name"><br>
+            <br><label for="passwordinput" id="passinp_label">PASSWORD</label>  
+            <input type="password" id="passwordinput" name="passwordinput" placeholder="Password"><br>
+            <br><button id="login" onclick="startApp()">LOGIN</button><br>
+        </div>
+    </div>
+    <div class="boxes" id="box1">
+        <img src="2.jpg" alt="Camera ">
+        <div id="criminal-data">
+            <center>
+                <label for="cellinput" id="cellinput_label">ENTER cell number</label>
+                <input type="text" name="cellinput" id="cellinput" placeholder="Cell Number"><br>
+                <br><label for="pname" id="pname_label">prisioner name</label>  
+                <input type="text" id="pname" name="pname" placeholder="name of prisioner"><br>
+                <br><label for="presenty" id="presenty_label">[P/A]: Present:P | Absent:A</label>  
+                <input type="text" id="presenty" name="presenty" placeholder="P/A "><br>
+            </center>
+            <div id="actions">
+                <br><button class="buttons" id="addrecord" onclick="savedata()">ADD RECORD</button><br>
+                <br><button class="buttons" id="download">DOWNLOAD DATA</button><br>
+
+            </div>
+        </div>
+        
+            
+    </div>
+    <script>
+        var data="";
+
+        function savedata(){
+            var cellinput=document.getElementById("cellinput").value;
+            var pname=document.getElementById("pname").value;
+            var presenty=document.getElementById("presenty").value;
+            data+=cellinput+":";
+            data+=pname+":";
+            data+=presenty+"\n";
+            document.getElementById("cellinput").value='';
+            document.getElementById("pname").value='';
+            document.getElementById("presenty").value='';         
+        }
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+        document.getElementById("download").addEventListener("click", function(){
+        // Generate download of hello.txt file with some content
+        download("attendence.txt", data);
+        }, false);
+
+
+
+
+        function startApp()
+        {
+            var username=document.getElementById("userinput").value;
+            var password=document.getElementById("passwordinput").value;
+            var box1=document.getElementById("box1");
+
+            if(username.toLowerCase().trim() == "admin" && password.toLowerCase().trim() == "password@123")
+            {
+                box1.style.display="flex";
+            }
+            else{
+                box1.style.display="none";
+            }
+            return;           
+
+        }
+    </script>
+</body>
+</html>
